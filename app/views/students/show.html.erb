@@ -1,0 +1,59 @@
+<h1>Students#show</h1>
+<p> <%= notice %> </p>
+<p> Name: <%= @student.name %> </p>
+<p> Date of Birth: <%= @student.date_of_birth %> </p>
+<p> Roll Number: <%= @student.roll_no %> </p><br>
+<% if @student.image.attached? %>
+	<%= image_tag(@student.image, size: "200x200") %>
+<% end %>
+<p> Area of interest <p>
+<% @student.area_of_interests.each do |aoi| %>
+	<li> <%= aoi.name %><br> </li>
+<% end %>
+<br>
+<h4> List of remarks </h4>
+<table>
+	<style>
+		td{
+		padding:2px;
+		}
+	</style>
+	<% @student.remarks.each do |remark| %>
+		<% if remark.remark_detail != nil %>
+		<tr>
+			<td> <%= remark.remark_detail %> </td>
+			<td> <%= link_to "destroy", college_department_student_remark_path(@college, @department, @student, remark), method: :delete, data: { confirm: "Are you sure to delete this remark?" } %> </td>
+		</tr>
+		<% end %>
+	<% end %>
+</table>
+
+<br>
+<%= form_with model: [@college, @department, @student, @remark] do |form| %>
+    <%= form.label :remark_detail %><br>
+    <%= form.text_field :remark_detail %>
+    <% @remark.errors.full_messages_for(:remark_detail).each do |message| %>
+        <%= message %>
+    <% end %>
+    <%= form.submit "Add remark"%>
+<% end %>
+<br>
+
+<div>
+  <h5> Submit rating</h5>
+  <%= form_with(url: performance_rating_college_department_student_path(@college, @department, @student), method: :post) do |f| %>
+    <% PerformanceRating::RATINGS.each do |rating, rate| %>
+      <%= f.radio_button "student[rating]", rate  %> <%= rating %>
+    <% end %>
+    <%= f.submit %>
+  <% end %>
+
+  <h5> Performance rated</h5>
+  <% PerformanceRating::RATINGS.each do |k, v| %>
+   <p><%= k %>: <%= @rating[v] || 0  %></p>
+<% end %>
+</div>
+
+<%= link_to "Edit", edit_college_department_student_path(@college, @department, @student) %> |
+<%= link_to "back", college_department_students_path(@college, @department)%>
+

@@ -1,0 +1,67 @@
+<div class="container mt-4">
+    <h1>Students index</h1>
+    
+    <%= link_to "New student", new_college_department_student_path(@college, @department), class: 'btn btn-primary my-3', data:{bs_toggle:'modal', bs_target:"#newStudentModal", remote: true} %>
+    <%= link_to "Back to department", college_departments_path(@college), class: "btn btn-secondary mx-3" %>
+
+    <table class='table table-hover table-bordered border-secondary mt-3'>
+        <style>
+            th, td{
+            padding:10px;
+            }
+        </style>
+    
+        <tbody id='studentIndex'>
+            <tr class='table-info table-bordered border-secondary'>
+                <th> Name of the student </th>
+                <th> Date of birth </th>
+                <th> Roll number </th>
+                <th colspan = "3"> Action </th>
+            </tr>
+        
+            <% @students.each do |student| %>
+                <%= render 'index', student: student %>
+            <% end %>
+        </tbody>
+    </table>
+</div>
+
+
+<div class="modal fade" id="newStudentModal" tabindex="-1" aria-labelledby="newStudentModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="newStudentModalLabel">Create New Student</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div id='newStudentForm'>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="showStudentModal" tabindex="-1" aria-labelledby="showStudentModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="showStudentModalLabel">Show Student</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div id='showStudentForm'>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="editStudentModal" tabindex="-1" aria-labelledby="editStudentModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="editStudentModalLabel">Edit Student</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div id='editStudentForm'>
+      </div>
+    </div>
+  </div>
+</div>

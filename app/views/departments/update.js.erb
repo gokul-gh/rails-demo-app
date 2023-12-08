@@ -1,0 +1,2 @@
+$("#departmentIndex_<%= department.id %>").replaceWith("<%= escape_javascript render('index', department: @department) %>");
+$("#editDepartmentModal").modal("hide");

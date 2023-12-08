@@ -1,0 +1,64 @@
+<div class="container mt-4">
+    <h1>List of Departments</h1>
+    <%= link_to "New department", new_college_department_path(@college, @department), class: "btn btn-primary my-3", data:{bs_toggle: "modal", bs_target: "#newDepartmentModal", remote: true} %> 
+    <%= link_to "Back to college", colleges_path, class: "btn btn-secondary mx-3" %>
+    <table class="table table-hover table-bordered border-secondary mt-3">
+        <style>
+            th, td{
+            padding:5px;
+            }
+        </style>
+
+        <tbody id="departmentIndex">
+          <tr>
+              <th> Name </th>
+              <th colspan="3"> Department code </th>
+          </tr>
+      
+          <% @departments.each do |department| %>
+            <%= render 'index', department: department %>
+          <% end %>
+        </tbody>
+    </table>
+</div>
+
+
+<div class="modal fade" id="newDepartmentModal" tabindex="-1" aria-labelledby="newDepartmentModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="newDepartmentModalLabel">Create New Department</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div id="newDepartmentForm"%>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="showDepartmentModal" tabindex="-1" aria-labelledby="showDepartmentModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="showDepartmentModalLabel">Show Department</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div id='showDepartmentForm'>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="editDepartmentModal" tabindex="-1" aria-labelledby="editDepartmentModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="editDepartmentModalLabel">Edit Department</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div id='editDepartmentForm'>
+      </div>
+    </div>
+  </div>
+</div>

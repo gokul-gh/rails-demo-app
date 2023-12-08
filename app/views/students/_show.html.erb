@@ -1,0 +1,67 @@
+<div class="modal-body" style="padding-left: 30px;" >
+	<% if @student.image.attached? %>
+		<%= image_tag(@student.image, size: "200x200", class: 'rounded img-thumbnail mx-auto d-block') %>
+	<% end %>
+	<div class="mt-3">
+		<strong> Name: </strong> <%= @student.name %> <br><br>
+		<strong> Date of Birth: </strong> <%= @student.date_of_birth %> <br><br>
+		<strong> Roll Number: </strong> <%= @student.roll_no %> <br><br>
+	</div>
+
+	<strong> Area of interest </strong>
+	<div class="mx-5">
+	<% @student.area_of_interests.each do |aoi| %>
+		<li> <%= aoi.name %><br> </li>
+	<% end %>
+	</div>
+	<br>
+
+	<h4> List of remarks </h4>
+	<table>
+		<style>
+			td{
+			padding:2px;
+			}
+		</style>
+		<% @student.remarks.each do |remark| %>
+			<% if remark.remark_detail != nil %>
+			<tr>
+				<td> <%= remark.remark_detail %> </td>
+				<td> <%= link_to "destroy", college_department_student_remark_path(@college, @department, @student, remark), method: :delete, data: { confirm: "Are you sure to delete this remark?" } %> </td>
+			</tr>
+			<% end %>
+		<% end %>
+	</table>
+	
+	<br>
+	<%= form_with model: [@college, @department, @student, @remark] do |form| %>
+	    <%= form.label :remark_detail %><br>
+	    <%= form.text_field :remark_detail %>
+	    <% @remark.errors.full_messages_for(:remark_detail).each do |message| %>
+        <%= message %>
+	    <% end %>
+	    <%= form.submit "Add remark"%>
+	<% end %>
+	<br>
+	
+	<div>
+	  <h5> Submit rating</h5>
+	  <%= form_with(url: performance_rating_college_department_student_path(@college, @department, @student), method: :post) do |f| %>
+  	  <% PerformanceRating::RATINGS.each do |rating, rate| %>
+  	  	<div class="form-check">
+  	  	  <%= f.radio_button "student[rating]", rate, class: 'form-check-input' %>
+      		<%= label_tag "student[rating]_#{rate}", rating, class: 'form-check-label' %>
+      	</div>
+  	  <% end %>
+  	  <%= f.submit class: 'btn btn-primary mt-2 mb-4' %>
+  	<% end %>
+	
+  	<h5> Performance rated</h5>
+  	<% PerformanceRating::RATINGS.each do |k, v| %>
+   		<p><%= k %>: <%= @rating[v] || 0  %></p>
+		<% end %>
+	</div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+</div>

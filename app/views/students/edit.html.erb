@@ -1,0 +1,7 @@
+<div class="container">
+	<h1>Students#edit</h1>
+	
+	<%= render "form", student: @student %>
+	<%= link_to "cancel", college_department_student_path(@college, @department, @student) %> |
+	<%= link_to "back to student list", college_department_students_path(@college, @department, @student) %>
+</div>

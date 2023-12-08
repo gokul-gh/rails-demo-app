@@ -1,0 +1,42 @@
+<%= form_with(model: [@college, @department ,student], local: false) do |form| %>
+    <div class="modal-body">
+        <div class="form-label">
+            <%= form.label :name %>
+            <%= form.text_field :name, class: "mt-1 form-control mb-3" %>
+        </div>
+
+        <div class="form-label"> 
+            <%= form.label :date_of_birth %>
+            <%= form.date_field :date_of_birth, class: "mt-1 input-group date mb-3" %>
+        </div>
+        
+        <div class="form-label">
+            <%= form.label :roll_no %>
+            <%= form.text_field :roll_no, class: "mt-1 form-control mb-3" %>
+        </div>
+        
+        <div class="form-label">
+            <%= form.label :image %>
+            <%= form.file_field :image, class: "mt-1 form-control" %>
+        </div>
+
+        <div class="form-label">
+            <%= form.label "Area of interest", class: "mt-3 mb-2" %><br>
+            <%= form.select :area_of_interest_ids, AreaOfInterest.all.collect { |t| [t.name, t.id]}, {include_blank: true}, {multiple: true} %>
+        </div>
+
+        <%= form.fields_for :area_of_interests_attributes do |form| %>
+            <div class="form-label mt-3">
+                <%= form.label "Name of the interest" %><br>
+                <%= form.text_field :name, class: "form-control" %>
+            </div>
+        <% end %><br><br>
+
+       
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <%= form.submit class: "btn btn-primary" %>
+    </div>
+    
+<% end %>

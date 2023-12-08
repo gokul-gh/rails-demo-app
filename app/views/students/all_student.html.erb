@@ -1,0 +1,35 @@
+<div class="container mt-4">
+	<h4> All list of students </h4>
+	
+	<%= form_for("/students", :method=>'get') do %>
+	  <strong> From: </strong> <%= date_field_tag :from, @from %>
+	  <strong> To: </strong> <%= date_field_tag :to, @to %>
+	  <%= submit_tag :"show details", class: 'btn btn-primary mx-2 mb-2' %>
+	<% end %>
+	
+	<table class="table table-hover table-bordered border-secondary mt-3">
+		<style>
+			th, td{
+				padding:10px;
+				}
+		</style>
+		<tr>
+			<th> Name </th>
+			<th> Date of Birth </th>
+			<th> Roll no </th>
+			<th> Department name </th>
+		</tr>
+	
+		<% @students.each do |student| %>
+			<tr>
+				<td> <%= student.name %> </td>
+				<td> <%= student.date_of_birth %> </td>
+				<td> <%= student.roll_no %> </td>
+				<td> <%= student.department.name %> </td>
+			</tr>
+		<% end %>
+	</table>
+	
+	<%= will_paginate @students %>
+	<%= link_to "back", colleges_path, class: 'btn btn-secondary' %>
+</div>

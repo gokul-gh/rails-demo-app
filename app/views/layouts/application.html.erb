@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>StudentManagementApp</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+        <script src="https://code.jquery.com/jquery-3.6.4.slim.js" integrity="sha256-dWvV84T6BhzO4vG6gWhsWVKVoa4lVmLnpBOZh/CAHU4=" crossorigin="anonymous"></script>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <% if staff_signed_in?%>
+      <%= link_to "logout", destroy_staff_session_path, class: 'btn btn-danger mt-2 mx-2', method: :delete %>
+      <%= link_to "edit profile", edit_staff_registration_path, class: 'btn btn-secondary mt-2 mx-2' %>
+    <% end %>
+
+    <% if notice.present? %>
+    <div class="container mt-4">
+      <div class="alert alert-info alert-dismissible fade show" role="alert">
+        <%= notice %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    </div>
+    <% end %>
+
+    <%= yield %>
+  </body>
+</html>

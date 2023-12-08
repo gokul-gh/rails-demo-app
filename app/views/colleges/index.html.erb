@@ -1,0 +1,59 @@
+<div class="container-sm mt-4">
+  <h1>List of all Colleges</h1>
+
+  <%= link_to "Area of interests", area_of_interests_path, class: "btn btn-primary" %>
+  <%= link_to "New college", new_college_path(@college), class: "btn btn-primary mx-5", data:{ bs_toggle: "modal", bs_target: "#newCollegeModal", remote: true} %>
+  <%= link_to "list of all students", students_path(@student), class: "btn btn-primary my-2" %>
+  <table class="table table-hover table-bordered border-secondary mt-2 text-center">
+      <style>
+          th, td{
+          padding:5px;
+          }
+      </style>
+    <tbody id="collegeList" >    
+      <% @colleges.each do |college| %>
+          <%= render 'index', college: college %>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+
+<div class="modal fade" id="newCollegeModal" tabindex="-1" aria-labelledby="newCollegeModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="newCollegeModalLabel">Create New College</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div id="newCollegeForm">
+      </div>      
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="showCollegeModal" tabindex="-1" aria-labelledby="showCollegeModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="showCollegeModalLabel">Show College</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div id="showCollegeForm">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="editCollegeModal" tabindex="-1" aria-labelledby="editCollegeModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="editCollegeModalLabel">Edit College</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div id="editCollegeForm">
+      </div>
+    </div>
+  </div>
+</div>

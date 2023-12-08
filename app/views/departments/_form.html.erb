@@ -1,0 +1,17 @@
+<%= form_with(model:[@college, department], local: false) do |form| %>
+    <div class="modal-body">
+        <div class="form-label">
+            <%= form.label :name %><br>
+            <%= form.text_field :name, class: "form-control mt-2" %>
+         </div>
+         
+         <div class='form-label mt-4'>   
+            <%= form.label :department_code %><br>
+            <%= form.text_field :department_code, class: 'form-control mt-2' %>
+        </div>
+    </div>
+    <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+    <%= form.submit class: 'btn btn-primary'%>
+    </div>
+<% end %>

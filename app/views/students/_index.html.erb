@@ -1,0 +1,15 @@
+<tr id='studentIndex_<%= student.id %>'>
+    <td><%= student.name %></td>
+    <td><%= student.date_of_birth %></td>
+    <td><%= student.roll_no %></td>
+    <td> <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Action
+        </button>
+         <ul class="dropdown-menu">
+           <li> <%= link_to "show", college_department_student_path(@college, @department, student), class: 'dropdown-item', data:{ bs_toggle: 'modal', bs_target: '#showStudentModal', remote: true} %> </li>
+           <li> <%= link_to "edit", edit_college_department_student_path(@college, @department, student), class: 'dropdown-item', data:{bs_toggle: 'modal', bs_target: '#editStudentModal', remote: true} %> </li>
+           <li> <%= link_to "destroy", college_department_student_path(@college, @department, student), method: :delete, data:{Confirm:"Are you sure for deleting this student?"}, class: 'dropdown-item' %> </li>
+        </ul>
+    </div> </td>
+</tr>

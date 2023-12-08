@@ -1,0 +1,12 @@
+<div class="modal-body">
+  <h1>Students#edit</h1>
+	
+	<%= render "form", student: @student %>
+	<%= link_to "cancel", college_department_student_path(@college, @department, @student) %> |
+	<%= link_to "back to student list", college_department_students_path(@college, @department, @student) %>
+
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+  <button type="button" class="btn btn-primary">Save changes</button>
+</div>	

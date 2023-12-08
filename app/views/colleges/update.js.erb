@@ -1,0 +1,2 @@
+$("#collegeList_<%= college.id %>").replaceWith("<%= escape_javascript render('index', college: @college)%>");
+$("#editCollegeModal").modal("hide");
