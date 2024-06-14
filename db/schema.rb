@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2023_05_15_034303) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -47,8 +50,8 @@ ActiveRecord::Schema.define(version: 2023_05_15_034303) do
   end
 
   create_table "area_of_interests_students", id: false, force: :cascade do |t|
-    t.integer "area_of_interest_id", null: false
-    t.integer "student_id", null: false
+    t.bigint "area_of_interest_id", null: false
+    t.bigint "student_id", null: false
   end
 
   create_table "colleges", force: :cascade do |t|
@@ -60,7 +63,7 @@ ActiveRecord::Schema.define(version: 2023_05_15_034303) do
   create_table "departments", force: :cascade do |t|
     t.string "name"
     t.string "department_code"
-    t.integer "college_id", null: false
+    t.bigint "college_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["college_id"], name: "index_departments_on_college_id"
@@ -76,7 +79,7 @@ ActiveRecord::Schema.define(version: 2023_05_15_034303) do
 
   create_table "remarks", force: :cascade do |t|
     t.string "remark_detail"
-    t.integer "student_id", null: false
+    t.bigint "student_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["student_id"], name: "index_remarks_on_student_id"
@@ -99,8 +102,8 @@ ActiveRecord::Schema.define(version: 2023_05_15_034303) do
     t.string "name"
     t.date "date_of_birth"
     t.string "roll_no"
-    t.integer "department_id", null: false
-    t.integer "college_id", null: false
+    t.bigint "department_id", null: false
+    t.bigint "college_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["college_id"], name: "index_students_on_college_id"
